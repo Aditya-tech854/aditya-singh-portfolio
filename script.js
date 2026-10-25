@@ -2,9 +2,11 @@
 const navToggle = document.getElementById('nav-toggle');
 const navLinksEl = document.getElementById('nav-links');
 
-navToggle.addEventListener('click', () => {
-  navLinksEl.classList.toggle('active');
-});
+if (navToggle && navLinksEl) {
+  navToggle.addEventListener('click', () => {
+    navLinksEl.classList.toggle('active');
+  });
+}
 
 document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', () => navLinksEl.classList.remove('active'));
@@ -18,12 +20,12 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
 function revealResultTable() {
   if (typeCursor) typeCursor.style.display = 'none';
-  resultTable.classList.add('show');
+  if (resultTable) resultTable.classList.add('show');
 }
 
 if (prefersReducedMotion) {
   revealResultTable();
-} else if (queryCode) {
+} else if (queryCode && typeCursor && resultTable) {
   const fullMarkup = queryCode.innerHTML;
   const fullText = queryCode.textContent.replace('_', '');
   queryCode.innerHTML = '';
